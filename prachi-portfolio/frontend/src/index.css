@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 37 53% 91%;
+        --foreground: 14 29% 17%;
+        --card: 40 60% 98%;
+        --card-foreground: 14 29% 17%;
+        --popover: 40 60% 98%;
+        --popover-foreground: 14 29% 17%;
+        --primary: 14 29% 17%;
+        --primary-foreground: 37 53% 91%;
+        --secondary: 35 38% 84%;
+        --secondary-foreground: 14 29% 17%;
+        --muted: 35 38% 84%;
+        --muted-foreground: 25 14% 38%;
+        --accent: 20 47% 55%;
+        --accent-foreground: 40 60% 98%;
+        --destructive: 0 62% 45%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 14 29% 17% / 0.14;
+        --input: 14 29% 17% / 0.2;
+        --ring: 20 47% 55%;
+        --radius: 1rem;
+    }
+    * { @apply border-border; }
+    html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+    body {
+        @apply bg-cream text-espresso font-sans antialiased;
+        overflow-x: clip;
+    }
+    ::selection { background: #C47B57; color: #FDFBF7; }
+    :focus-visible { outline: 2px solid #C47B57; outline-offset: 3px; border-radius: 6px; }
+}
+
+@layer components {
+    .grain::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 60;
+        opacity: 0.07;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .eyebrow { @apply font-mono text-xs uppercase tracking-[0.18em] text-ash; }
+    .h2 { @apply font-serif text-5xl sm:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-espresso; }
+    .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-espresso/15 bg-paper/70 px-3 py-1 font-mono text-[12px] text-espresso; }
+    .btn-primary { @apply inline-flex items-center gap-2 rounded-full bg-espresso px-6 py-3.5 text-sm font-semibold text-cream transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-coffee active:translate-y-0; }
+    .btn-ghost { @apply inline-flex items-center gap-2 rounded-full border border-espresso/25 px-6 py-3.5 text-sm font-semibold text-espresso transition-[transform,background-color,border-color] duration-300 hover:-translate-y-0.5 hover:border-espresso hover:bg-espresso/5; }
+    .btn-terra { @apply inline-flex items-center gap-2 rounded-full bg-terra px-6 py-3.5 text-sm font-semibold text-paper transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-[#B06A48]; }
+    .receipt-edge {
+        --z: 10px;
+        -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--z)) 100%,
+                      conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--z)) 100%;
+        -webkit-mask-composite: source-in;
+        mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--z)) 100%,
+              conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(2 * var(--z)) 100%;
+        mask-composite: intersect;
+    }
+    .tape { @apply absolute h-6 w-20 bg-[#E7D9C6]/80 shadow-sm; backdrop-filter: blur(2px); }
+}
+
+.marquee-track { animation: marquee 70s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.steam-line { animation: steam 3.2s ease-in-out infinite; }
+@keyframes steam { 0% { transform: translateY(6px); opacity: 0; } 50% { opacity: .7; } 100% { transform: translateY(-14px); opacity: 0; } }
+.blink { animation: blink 1s steps(2) infinite; }
+@keyframes eq { from { height: 3px; } to { height: 16px; } }
+@keyframes blink { 50% { opacity: 0; } }
+.bean-fall { animation: beanfall linear forwards; }
+@keyframes beanfall { from { transform: translateY(-10vh) rotate(0deg); } to { transform: translateY(110vh) rotate(540deg); } }
+
+@media (pointer: fine) {
+    .hero-cursor-zone, .hero-cursor-zone a, .hero-cursor-zone button { cursor: none; }
+}
+
+.recruiter-calm *, .recruiter-calm *::before, .recruiter-calm *::after { animation: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    .hero-cursor-zone, .hero-cursor-zone a, .hero-cursor-zone button { cursor: auto; }
+}
+
+@media print {
+    .no-print { display: none !important; }
+    body { background: #fff; }
+    .grain::before { display: none; }
+    .print-break { break-inside: avoid; }
+}
